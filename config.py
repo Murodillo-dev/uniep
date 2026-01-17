@@ -3,9 +3,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv("8233120933:AAHuGd11rbtpyX5CHh9Cb-gKiMZJuxdvzlY")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-ADMINS = 1862168078
-
-
-
+ADMINS = list(map(int, os.getenv("ADMINS", "").split(",")))
