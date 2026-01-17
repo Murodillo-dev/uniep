@@ -62,9 +62,9 @@ async def handle_messages(message: Message):
                 chat_id=admin_id,
                 text=(
                     f"Yangi xabar:\n{user_text}\n\n"
-                    f"User ID: {user_id}\n"
-                    f"Username: @{username}\n"
-                    f"Full Name: {full_name}"
+                    # f"User ID: {user_id}\n"
+                    f"Foylanuvchi nomi: @{username}\n"
+                    f"Foydalanuvchining To'liq ismi : {full_name}"
                 )
             )
 
