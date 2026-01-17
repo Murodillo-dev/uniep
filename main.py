@@ -16,7 +16,7 @@ admin_to_user_mapping = {}
 @dp.message(CommandStart())
 async def start(message: Message):
     await message.answer(
-        "Xabaringizni yozing, adminlar javob beradi."
+        "Ushbu bot orqali yuborilgan savol va takliflar Ta’lim sifatini nazorat qilish bo‘limi boshlig‘i tomonidan belgilangan tartibda ko‘rib chiqilib, javob taqdim etiladi."
     )
 
 
