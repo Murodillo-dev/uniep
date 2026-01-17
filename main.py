@@ -77,7 +77,7 @@ async def handle_messages(message: Message):
         except Exception as e:
             print(f"Xabar adminga yuborilmadi: {e}")
 
-    await message.answer("Xabaringiz adminlarga yuborildi ✅")
+    await message.answer("Xabaringiz adminlarga yuborildi tez orada javob beramiz ✅")
 
 
 # ---------------- MAIN ----------------
