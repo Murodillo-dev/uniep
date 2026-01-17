@@ -21,76 +21,9 @@ async def start(message: Message):
 
 
 # ---------------- Handle Messages ----------------
-# @dp.message()
-# async def handle_messages(message: Message):
-#     user_id = message.from_user.id
-#
-#     # ======= ADMIN yozayotgan bo‘lsa =======
-#     if user_id in ADMINS:
-#
-#         if not message.reply_to_message:
-#             await message.reply("Iltimos, javobni faqat reply orqali yozing.")
-#             return
-#
-#         reply_msg = message.reply_to_message
-#
-#         if reply_msg.message_id not in admin_to_user_mapping:
-#             await message.reply("Xabar formatini topa olmadim.")
-#             return
-#
-#         target_user_id, user_message_id = admin_to_user_mapping[reply_msg.message_id]
-#
-#         try:
-#             await bot.send_message(
-#                 chat_id=target_user_id,
-#                 text=f"Admin javobi:\n{message.text}",
-#                 reply_to_message_id=user_message_id
-#             )
-#         except Exception as e:
-#             await message.reply(f"Xabar yuborilmadi: {e}")
-#         return
-#
-#     # ======= USER yozayotgan bo‘lsa =======
-#     user_text = message.text or "<media>"
-#
-#     username = message.from_user.username or "No username"
-#     full_name = message.from_user.full_name or "No name"
-#
-#     for admin_id in ADMINS:
-#         try:
-#             sent_message = await bot.send_message(
-#                 chat_id=admin_id,
-#                 text=(
-#                     f"Yangi xabar:\n{user_text}\n\n"
-#                     f"User ID: {user_id}\n"
-#                     f"Username: @{username}\n"
-#                     f"Full Name: {full_name}"
-#                 )
-#             )
-#
-#             # mapping: admin_message_id → (user_id, user_message_id)
-#             admin_to_user_mapping[sent_message.message_id] = (
-#                 user_id,
-#                 message.message_id
-#             )
-#
-#         except Exception as e:
-#             print(f"Xabar adminga yuborilmadi: {e}")
-#
-#     await message.answer("Xabaringiz adminlarga yuborildi ✅")
-
-
-# ---------------- MAIN ----------------
-
-# ---------------- Handle Messages ----------------
 @dp.message()
 async def handle_messages(message: Message):
     user_id = message.from_user.id
-
-    # ======= USER faqat matn yuborishi mumkinligini tekshirish =======
-    if not message.text:
-        await message.answer("❌ Faqat matnli xabar yuborishingiz mumkin.")
-        return
 
     # ======= ADMIN yozayotgan bo‘lsa =======
     if user_id in ADMINS:
@@ -117,8 +50,9 @@ async def handle_messages(message: Message):
             await message.reply(f"Xabar yuborilmadi: {e}")
         return
 
-    # ======= USER yozayotgan bo‘lsa (matnli xabar) =======
-    user_text = message.text
+    # ======= USER yozayotgan bo‘lsa =======
+    user_text = message.text or "<media>"
+
     username = message.from_user.username or "No username"
     full_name = message.from_user.full_name or "No name"
 
@@ -143,8 +77,12 @@ async def handle_messages(message: Message):
         except Exception as e:
             print(f"Xabar adminga yuborilmadi: {e}")
 
-    await message.answer("✅ Xabaringiz adminlarga yuborildi")
+    await message.answer("Xabaringiz adminlarga yuborildi ✅")
 
+
+# ---------------- MAIN ----------------
+
+# ---------------- Handle Messages ---------------
 
 async def main():
     print("Bot ishga tushdi va doimiy ishlayapti...")
